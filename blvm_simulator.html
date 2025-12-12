@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLVM: Elige tu destino</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #eee;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            /* Prevent scroll on mobile if possible */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #ff5722;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.8rem;
+        }
+
+        p.subtitle {
+            color: #aaa;
+            margin: 0 0 20px 0;
+            /* Reduced margin to fit score */
+            font-style: italic;
+        }
+
+        /* SCORE BOARD */
+        .score-board {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            display: inline-block;
+        }
+
+        /* CARD GRID */
+        .card-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .card-container {
+            width: 32%;
+            /* Fits 3 in a row */
+            aspect-ratio: 2/3;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+
+        /* FLIP STATES */
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* FRONT (Hidden side initially, shows pattern) */
+        .card-front {
+            background: linear-gradient(135deg, #333 0%, #111 100%);
+            border: 2px solid #555;
+            color: #555;
+            font-size: 2rem;
+        }
+
+        .card-front::after {
+            content: '?';
+        }
+
+        /* BACK (Revealed side) */
+        .card-back {
+            background-color: #eee;
+            color: #222;
+            transform: rotateY(180deg);
+            border: 4px solid #fff;
+        }
+
+        /* Event Types Colors */
+        .card-back.pos {
+            background: linear-gradient(135deg, #a5d6a7 0%, #66bb6a 100%);
+            border-color: #2e7d32;
+            color: #1b5e20;
+        }
+
+        .card-back.neg {
+            background: linear-gradient(135deg, #ef9a9a 0%, #ef5350 100%);
+            border-color: #c62828;
+            color: #b71c1c;
+        }
+
+        /* BUTTON */
+        #btn-reset {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background-color: #fff;
+            color: #121212;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+            font-weight: bold;
+            text-transform: uppercase;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+            transform: translateY(20px);
+        }
+
+        #btn-reset.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        /* Mobile tweaks */
+        @media (max-width: 400px) {
+            .card-grid {
+                gap: 10px;
+            }
+
+            .card-face {
+                font-size: 0.8rem;
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>BLVM:<br>Elige tu destino</h1>
+        <p class="subtitle">Dale vuelta una carta... si te animás.</p>
+
+        <div class="score-board">Puntaje: <span id="score-val">0</span></div>
+
+        <div class="card-grid">
+            <!-- Card 1 -->
+            <div class="card-container" onclick="flipCard(0)">
+                <div class="card" id="card-0">
+                    <div class="card-face card-front"></div>
+                    <div class="card-face card-back" id="back-0">Event Text</div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="card-container" onclick="flipCard(1)">
+                <div class="card" id="card-1">
+                    <div class="card-face card-front"></div>
+                    <div class="card-face card-back" id="back-1">Event Text</div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="card-container" onclick="flipCard(2)">
+                <div class="card" id="card-2">
+                    <div class="card-face card-front"></div>
+                    <div class="card-face card-back" id="back-2">Event Text</div>
+                </div>
+            </div>
+        </div>
+
+        <button id="btn-reset" onclick="newRound()">Nueva Ronda</button>
+    </div>
+
+    <script>
+        const EVENTS_POS = [
+            "Mariano se mandó alto asado a la estaca.",
+            "Chewie renderizó algo.",
+            "El Kabeza organizó un plan.",
+            "Titon trajo una Coca.",
+            "Lucho hizo bondiola desmechada.",
+            "El Turko armó alto troncho.",
+            "Max te invitó a la cancha.",
+            "Mimo aparece y dice “hola”.",
+            "Lautaro te regaló un alfajor."
+        ];
+
+        const EVENTS_NEG = [
+            "Chewie disoció.",
+            "Max mandó fotopija.",
+            "Lucho no entendió la conversación.",
+            "El Turko transpiró todo.",
+            "Al Kabeza se le rompieron los palillos.",
+            "Al Tanke se le secó la concha.",
+            "Totem modo Pepsi Max.",
+            "A Juanse le dio la pálida.",
+            "Lautaro se fue del grupo."
+        ];
+
+        let canFlip = true;
+        let currentRoundEvents = [];
+        let currentScore = 0;
+
+        function init() {
+            newRound();
+        }
+
+        function updateScoreUI() {
+            document.getElementById('score-val').innerText = currentScore;
+        }
+
+        function newRound() {
+            canFlip = true;
+            // Reset UI
+            document.getElementById('btn-reset').classList.remove('visible');
+
+            // Remove flipped class from all cards
+            for (let i = 0; i < 3; i++) {
+                document.getElementById(`card-${i}`).classList.remove('flipped');
+                // Slight delay to reset content so user doesn't see swap
+                setTimeout(() => {
+                    const back = document.getElementById(`back-${i}`);
+                    back.className = 'card-face card-back'; // reset colors
+                    back.innerText = '';
+                }, 300);
+            }
+
+            // Logic: 1 Pos, 1 Neg, 1 Random
+            let p1 = EVENTS_POS[Math.floor(Math.random() * EVENTS_POS.length)];
+            let n1 = EVENTS_NEG[Math.floor(Math.random() * EVENTS_NEG.length)];
+
+            let extraIsPos = Math.random() > 0.5;
+            let extra = extraIsPos
+                ? EVENTS_POS[Math.floor(Math.random() * EVENTS_POS.length)]
+                : EVENTS_NEG[Math.floor(Math.random() * EVENTS_NEG.length)];
+
+            while (extra === p1 || extra === n1) {
+                extra = extraIsPos
+                    ? EVENTS_POS[Math.floor(Math.random() * EVENTS_POS.length)]
+                    : EVENTS_NEG[Math.floor(Math.random() * EVENTS_NEG.length)];
+            }
+
+            let set = [
+                { text: p1, type: 'pos' },
+                { text: n1, type: 'neg' },
+                { text: extra, type: extraIsPos ? 'pos' : 'neg' }
+            ];
+
+            // Shuffle
+            set.sort(() => Math.random() - 0.5);
+            currentRoundEvents = set;
+
+            // Apply to DOM (but hidden backside)
+            // We do this after delay to not show changes while flipping back
+            setTimeout(() => {
+                for (let i = 0; i < 3; i++) {
+                    const back = document.getElementById(`back-${i}`);
+                    back.innerText = currentRoundEvents[i].text;
+                    back.classList.add(currentRoundEvents[i].type);
+                }
+            }, 300);
+        }
+
+        function flipCard(idx) {
+            if (!canFlip) return;
+            const card = document.getElementById(`card-${idx}`);
+            if (card.classList.contains('flipped')) return; // already flipped
+
+            // Flip selected
+            card.classList.add('flipped');
+            canFlip = false;
+
+            // Apply Score Logic
+            const eventType = currentRoundEvents[idx].type;
+            if (eventType === 'pos') {
+                currentScore++;
+            } else {
+                currentScore--;
+            }
+            updateScoreUI();
+
+            // Reveal others after delay
+            setTimeout(() => {
+                for (let i = 0; i < 3; i++) {
+                    if (i !== idx) {
+                        document.getElementById(`card-${i}`).classList.add('flipped');
+                    }
+                }
+                // Show reset button
+                setTimeout(() => {
+                    document.getElementById('btn-reset').classList.add('visible');
+                }, 500);
+            }, 600);
+        }
+
+        // Start
+        init();
+
+    </script>
+
+</body>
+
+</html>
