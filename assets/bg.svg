@@ -1,0 +1,58 @@
+<svg width="1600" height="600" viewBox="0 0 1600 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs>
+        <linearGradient id="skyColors" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2196f3" />
+            <stop offset="100%" stop-color="#b3e5fc" />
+        </linearGradient>
+    </defs>
+    
+    <!-- Sky -->
+    <rect width="1600" height="600" fill="url(#skyColors)" />
+    
+    <!-- Sun -->
+    <circle cx="1500" cy="80" r="50" fill="#fdd835" />
+    
+    <!-- Background Buildings (Darker, Slower) -->
+    <g fill="#546e7a">
+        <rect x="0" y="200" width="100" height="400" />
+        <rect x="150" y="250" width="120" height="350" />
+        <rect x="300" y="150" width="80" height="450" />
+        <rect x="500" y="300" width="150" height="300" />
+        <rect x="700" y="220" width="90" height="380" />
+        <rect x="900" y="180" width="110" height="420" />
+        <rect x="1100" y="280" width="130" height="320" />
+        <rect x="1300" y="200" width="100" height="400" />
+        <rect x="1500" y="250" width="100" height="350" />
+    </g>
+    
+    <!-- Foreground Buildings (Lighter, detailed) -->
+    <g fill="#78909c">
+        <rect x="50" y="350" width="80" height="250" />
+        <rect x="200" y="400" width="100" height="200" />
+        <rect x="350" y="320" width="120" height="280" />
+        <rect x="600" y="380" width="90" height="220" />
+        <rect x="800" y="300" width="110" height="300" />
+        <rect x="1000" y="420" width="80" height="180" />
+        <rect x="1200" y="350" width="140" height="250" />
+        <rect x="1400" y="380" width="100" height="220" />
+    </g>
+
+    <!-- Windows (Random lights) -->
+    <g fill="#fff59d">
+        <rect x="60" y="370" width="10" height="20" />
+        <rect x="80" y="370" width="10" height="20" />
+        <rect x="60" y="410" width="10" height="20" />
+        
+        <rect x="370" y="350" width="15" height="25" />
+        <rect x="400" y="350" width="15" height="25" />
+        <rect x="370" y="400" width="15" height="25" />
+        
+        <rect x="820" y="320" width="12" height="18" />
+        <rect x="850" y="320" width="12" height="18" />
+        <rect x="820" y="360" width="12" height="18" />
+        
+        <rect x="1220" y="370" width="20" height="20" />
+        <rect x="1260" y="370" width="20" height="20" />
+        <rect x="1220" y="410" width="20" height="20" />
+    </g>
+</svg>

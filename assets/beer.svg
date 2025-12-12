@@ -1,0 +1,5 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 20 L12 28 Q 12 30 16 30 Q 20 30 20 28 L20 20 L18 10 L18 2 L14 2 L14 10 Z" fill="#a1887f" stroke="none" />
+    <path d="M12 20 L20 20 L20 28 Q 20 30 16 30 Q 12 30 12 28 Z" fill="#5d4037" /> <!-- Darker glass body -->
+    <rect x="14" y="14" width="4" height="4" fill="#ffeb3b" /> <!-- Label -->
+</svg>

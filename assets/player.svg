@@ -1,0 +1,26 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <!-- Dreadlocks -->
+    <path d="M10 10 Q 5 20 10 30 T 15 50" stroke="#3e2723" stroke-width="4" fill="none" />
+    <path d="M54 10 Q 59 20 54 30 T 49 50" stroke="#3e2723" stroke-width="4" fill="none" />
+    <path d="M15 5 Q 0 15 5 40" stroke="#3e2723" stroke-width="4" fill="none" />
+    <path d="M49 5 Q 64 15 59 40" stroke="#3e2723" stroke-width="4" fill="none" />
+    
+    <!-- Body -->
+    <rect x="18" y="30" width="28" height="30" fill="black" rx="5" />
+    <!-- Inverted Cross -->
+    <path d="M32 55 L32 35 M25 45 L39 45" stroke="white" stroke-width="3" />
+    
+    <!-- Head -->
+    <circle cx="32" cy="20" r="12" fill="#e0ac69" />
+    <!-- Beard -->
+    <path d="M20 20 Q 32 40 44 20" fill="#212121" />
+    <!-- Eyes -->
+    <circle cx="28" cy="18" r="2" fill="white" />
+    <circle cx="28" cy="18" r="0.5" fill="black" />
+    <circle cx="36" cy="18" r="2" fill="white" />
+    <circle cx="36" cy="18" r="0.5" fill="black" />
+    
+    <!-- Arm -->
+    <path d="M18 35 Q 10 40 10 50" stroke="#e0ac69" stroke-width="4" fill="none" />
+    <path d="M46 35 Q 54 40 54 50" stroke="#e0ac69" stroke-width="4" fill="none" />
+</svg>

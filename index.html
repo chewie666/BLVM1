@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Un Gordo Mariguano</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="rotate-screen">
+        <div class="message">
+            <h1>Por favor, rota el celular para jugar mejor 📱➡️🔄</h1>
+            <p>Toca la pantalla para comenzar</p>
+        </div>
+    </div>
+
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="ui-layer">
+            <div id="health-bar-container">
+                <div id="health-bar"></div>
+            </div>
+            <div id="score">Score: 0</div>
+            <div id="game-over-screen" class="hidden">
+                <h1>Game Over</h1>
+                <button id="restart-btn">Reiniciar</button>
+            </div>
+        </div>
+
+        <div id="controls">
+            <div class="d-pad">
+                <button id="btn-left" class="control-btn">⬅️</button>
+                <button id="btn-right" class="control-btn">➡️</button>
+            </div>
+            <div class="action-buttons">
+                <button id="btn-attack" class="control-btn action">🥁</button>  <!-- Drum/Stick icon -->
+                <button id="btn-jump" class="control-btn action">⬆️</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

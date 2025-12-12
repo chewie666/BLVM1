@@ -1,0 +1,31 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs>
+        <linearGradient id="skyColors" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0277bd" />
+            <stop offset="100%" stop-color="#81d4fa" />
+        </linearGradient>
+    </defs>
+    
+    <!-- Sky -->
+    <rect width="800" height="600" fill="url(#skyColors)" />
+    
+    <!-- Clouds -->
+    <circle cx="100" cy="100" r="30" fill="white" opacity="0.6" />
+    <circle cx="140" cy="110" r="40" fill="white" opacity="0.6" />
+    <circle cx="500" cy="80" r="30" fill="white" opacity="0.6" />
+    
+    <!-- Buildings Layer 1 (Back) -->
+    <path d="M50 600 L50 300 L150 300 L150 600 Z" fill="#90a4ae" />
+    <path d="M200 600 L200 250 L350 250 L350 600 Z" fill="#78909c" />
+    <path d="M400 600 L400 350 L500 350 L500 600 Z" fill="#607d8b" />
+    <path d="M600 600 L600 200 L750 200 L750 600 Z" fill="#546e7a" />
+    
+    <!-- Windows -->
+    <rect x="220" y="270" width="20" height="30" fill="#fff59d" />
+    <rect x="260" y="270" width="20" height="30" fill="#fff59d" />
+    <rect x="220" y="320" width="20" height="30" fill="#cfd8dc" />
+    
+    <!-- Ground -->
+    <rect y="500" width="800" height="100" fill="#3e2723" />
+    <rect y="500" width="800" height="10" fill="#4caf50" /> <!-- Grass top -->
+</svg>
